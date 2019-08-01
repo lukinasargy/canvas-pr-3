@@ -1,0 +1,136 @@
+/*!
+*
+*
+* FONTS IMPORT
+*
+*
+*/
+
+@import "vars";
+@import "fonts";
+/*!
+*
+*
+* LIBS FILES
+*
+*
+*/
+
+@import "libs";
+/*!
+*
+*
+* END OF LIBS FILES
+*
+* MAIN.CSS START
+*
+*
+*/
+
+::placeholder {
+  color: #666;
+}
+
+::selection {
+  background-color: $accent;
+  color: #fff;
+}
+
+
+body {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  /*  background: linear-gradient(bisque, lightskyblue);*/
+//  height: 100vh;
+}
+
+@keyframes bg-color {
+  0% {
+    background-color: papayawhip;
+  }
+
+  25% {
+    background-color: lightskyblue;
+  }
+
+  50% {
+    background-color: azure;
+  }
+
+  75% {
+    background-color: cornsilk;
+  }
+
+  100% {
+    background-color: bisque;
+  }
+}
+#canvas {
+  background-color: lightskyblue;
+//  animation-name: bg-color;
+  animation-duration: 50s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+
+}
+
+@keyframes mymove {
+  0% {
+    top: 0%;
+    right: 0%;
+  }
+
+  25% {
+    right: calc(100% - 300px);
+    top: 0%;
+  }
+
+  50% {
+    top: calc(100% - 300px);
+    right: calc(100% - 300px);
+
+  }
+
+  75% {
+    top: calc(100% - 300px);
+    right: 0%;
+  }
+
+  100% {
+    top: 0%;
+    right: 0%;
+  }
+}
+
+.rect {
+  width: 150px;
+  height: 150px;
+  background-color: #fff;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+
+#glCanvas {
+  //  background-color: #000;
+  position: relative;
+}
+
+/*!
+*
+*
+* END OF MAIN.CSS
+*
+* MEDIA.CSS START
+*
+*
+*/
+
+@import "media"; // Always at the end

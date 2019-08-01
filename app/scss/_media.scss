@@ -1,0 +1,131 @@
+@import "vars";
+
+
+/*==========  Desktop First  ==========*/
+
+//Extra large: ≥1200px
+@include media-breakpoint-down(xl) {}
+
+//Large: ≥992px
+@include media-breakpoint-down(lg) {}
+
+//Medium: ≥768px
+@include media-breakpoint-down(md) {
+    .container {
+        width: 100%;
+        max-width: 480px;
+    }
+    
+    .circle {
+        &_t, &_d{
+            display: none;
+        }
+    }
+    .m-content {
+        padding: 100px 0 80px 0;
+        &:before {
+            content: none;
+        }
+    }
+    .m-title {
+        font-size: 34px;
+        margin-bottom: 30px;
+    }
+   
+    .m-text {
+        font-size: 16px;
+    }
+    .v-button {
+        margin: 16px auto;
+    }
+
+
+    .p {
+        &-item {
+            &:nth-child(even),
+            &:nth-child(odd) {
+                padding: 0;
+            }
+        }
+
+        &-img {
+            display: block;
+            width: 100%;
+            &:after {
+                padding-top: 56%;
+            }
+
+
+        }
+        &-content {
+            display: block;
+            width: 100%;
+            padding: 0;
+        }
+        &-title {
+            padding: 12px;
+            text-align: center;
+            color: #fff;
+            background-color: #73bd42;
+            min-height: 70px;
+        }
+
+    }
+    .o-left,
+    .o-right {
+        display: block;
+        width: 100%;
+        padding: 0;
+    }
+    .o-circle_prod {
+        padding-top: 120%;
+        left: -10%;
+        width: 120%;
+    }
+    .order_form {
+        padding: 40px 16px;
+    }
+    .v-section {
+        padding: 60px 0 40px;
+    }
+    .p-section {
+        padding: 100px 0 80px;
+    }
+    .o-section {
+        padding: 20px 0 80px;
+    }
+    .price {
+
+        &_new {
+            font-size: 16px;
+        }
+        &_old {
+            font-size: 14px;
+        }
+
+    }
+}
+
+//Small: ≥576px
+@include media-breakpoint-down(sm) {}
+
+//Extra small: >0
+@include media-breakpoint-down(xs) {}
+
+
+/*==========  Mobile First  ==========*/
+
+//Extra small: <576px
+@include media-breakpoint-up(xs) {}
+
+//Small: ≤576px
+@include media-breakpoint-up(sm) {}
+
+//Medium: ≤768px
+@include media-breakpoint-up(md) {}
+
+//Large: ≤992px
+@include media-breakpoint-up(lg) {}
+
+//Extra large: ≤1200px
+@include media-breakpoint-up(xl) {}
