@@ -2,15 +2,15 @@ function breackout() {
   //defining canvas
   var canvas = document.getElementById('canvas');
   var ctx = canvas.getContext('2d');
-
   //variables start
 
   var ballRadius = 20;
-  var x = ballRadius; //begining coordinates
-  var y = canvas.height / 2; //begining coordinates
-  var dx = 4;
-  var dy = -4;
+  var x = ballRadius + Math.floor((canvas.width - ballRadius) * Math.random()); //begining coordinates
+  var y = ballRadius; //begining coordinates
+  var dx = Math.round(Math.random() * 3) + 2;
+  var dy = Math.round(Math.random() * 3) + 2;
   var ballColor = "yellow";
+  var persons = 1;
 
 
   //paddle parameters
@@ -18,8 +18,15 @@ function breackout() {
   var paddleWidth = 140;
   var paddleColor = 'grey';
   var paddleX = (canvas.width - paddleWidth) / 2;
+  var paddleX2 = (canvas.width - paddleWidth) / 2;
   var rightPressed = false;
   var leftPressed = false;
+
+  var rightPressed2 = false;
+  var leftPressed2 = false;
+
+  var score = 0;
+  var score2 = 0;
 
   //variables end
 
@@ -33,6 +40,10 @@ function breackout() {
       rightPressed = true;
     } else if (e.key == "Left" || e.key == "ArrowLeft") {
       leftPressed = true;
+    } else if (e.code == "KeyD") {
+      rightPressed2 = true;
+    } else if (e.code == "KeyA") {
+      leftPressed2 = true;
     }
   }
 
@@ -41,8 +52,14 @@ function breackout() {
       rightPressed = false;
     } else if (e.key == "Left" || e.key == "ArrowLeft") {
       leftPressed = false;
+    } else if (e.code == "KeyD") {
+      rightPressed2 = false;
+    } else if (e.code == "KeyA") {
+      leftPressed2 = false;
     }
   }
+
+
   //event listeners for paddle end
 
 
@@ -64,45 +81,68 @@ function breackout() {
     ctx.closePath();
   }
 
-  function drawPaddle() {
+  function drawPaddle(paddleX, paddleY) {
     ctx.beginPath();
-    ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+    ctx.rect(paddleX, paddleY, paddleWidth, paddleHeight);
     ctx.fillStyle = paddleColor;
     ctx.fill();
     ctx.closePath();
   }
+
   function gameOver() {
     ctx.fillStyle = "#F00";
     ctx.font = 'bold 40px sans-serif';
-    ctx.fillText("Game Over", (canvas.width/2 - 100), canvas.height/2);
-    clearInterval(refreshIntervalId);
+    ctx.fillText("Game Over", (canvas.width / 2 - 100), canvas.height / 2);
+    ctx.fillStyle = "blue";
+    ctx.font = 'bold 20px sans-serif';
+    ctx.fillText("press any key to reload", (canvas.width / 2 - 100), canvas.height / 2 + 50);
+    document.onkeypress = function (e) {
+      document.location.reload();
+    }
+    clearInterval(refreshInterval);
   }
+  function reset () {
+     x =  Math.floor(ballRadius + (canvas.width  - ballRadius) * Math.random()); //begining coordinates
+     y = ballRadius + paddleHeight; //begining coordinates
+  }
+
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBall();
-    drawPaddle();
-
+    drawPaddle(paddleX, canvas.height - paddleHeight);
+    drawPaddle(paddleX2, 0);
+    $('#key').html(dx + "scoreDown =" + score + "scoreUp=" + score2);
     x += dx;
     y += dy;
-    if (y - ballRadius < 0 ) {
-      dy = -dy;
-      ballColor = getRandomColor();
-      drawBall();
-    }
-    if (y - ballRadius > canvas.height) {
-      gameOver();
-      
-    }
-    if (x - ballRadius < 0 || x + ballRadius > canvas.width  ) {
+    //ball hitting wall
+    //    if ((y - ballRadius) < 0) {
+    //      score += 100;
+    //      x = ballRadius + Math.floor((canvas.width - ballRadius) * Math.random());
+    //      y = ballRadius + Math.floor((canvas.width - ballRadius) * Math.random());
+    //      //      dy = -dy;
+    //    }
+    //ball hitting wall
+    if (x - ballRadius < 0 || x + ballRadius > canvas.width) {
       dx = -dx;
-      ballColor = getRandomColor();
-      drawBall();
     }
-    if ( ( paddleX < x && x < (paddleX + paddleWidth) ) && (y + ballRadius >  canvas.height - paddleHeight) ) {
-      dy = -dy;
-      ballColor = getRandomColor();
-      drawBall();
+    //paddle ball interaction
+    else if (y + ballRadius > canvas.height - paddleHeight) {
+      if (x > paddleX && x < paddleX + paddleWidth) {
+        dy = -dy;
+      } else if (y + ballRadius > canvas.height) {
+        //              gameOver();
+        score2 += 100;
+        reset();
+      }
+    } else if (y - ballRadius < paddleHeight) {
+      if (x > paddleX2 && x < paddleX2 + paddleWidth) {
+        dy = -dy;
+      } else if (y - ballRadius < 0) {
+        score += 100;
+        reset();
+      };
     }
+
 
     //paddle moving logic
     if (rightPressed && paddleX < canvas.width - paddleWidth) {
@@ -110,10 +150,16 @@ function breackout() {
     } else if (leftPressed && paddleX > 0) {
       paddleX -= 7;
     }
-//    $('#key').html('right=' + rightPressed + ' left =' + leftPressed);
+
+    //second player
+    if (rightPressed2 && paddleX2 < canvas.width - paddleWidth) {
+      paddleX2 += 7;
+    } else if (leftPressed2 && paddleX2 > 0) {
+      paddleX2 -= 7;
+    }
 
   }
-  
-  var refreshIntervalId = setInterval(draw, 10);
+
+  var refreshInterval = setInterval(draw, 10);
 
 }
