@@ -5,7 +5,7 @@ function breackout() {
   //variables start
 
   var ballRadius = 20;
-  var x = ballRadius + Math.floor((canvas.width - ballRadius) * Math.random()); //begining coordinates
+  var x = ballRadius + Math.floor((canvas.width - 2 * ballRadius) * Math.random()); //begining coordinates
   var y = ballRadius; //begining coordinates
   var dx = Math.round(Math.random() * 3) + 2;
   var dy = Math.round(Math.random() * 3) + 2;
@@ -101,9 +101,10 @@ function breackout() {
     }
     clearInterval(refreshInterval);
   }
-  function reset () {
-     x =  Math.floor(ballRadius + (canvas.width  - ballRadius) * Math.random()); //begining coordinates
-     y = ballRadius + paddleHeight; //begining coordinates
+
+  function reset() {
+    x = Math.floor(ballRadius + (canvas.width - 2 * ballRadius) * Math.random()); //begining coordinates
+    y = ballRadius + paddleHeight; //begining coordinates
   }
 
   function draw() {
@@ -130,18 +131,21 @@ function breackout() {
       if (x > paddleX && x < paddleX + paddleWidth) {
         dy = -dy;
       } else if (y + ballRadius > canvas.height) {
-        //              gameOver();
         score2 += 100;
         reset();
       }
     } else if (y - ballRadius < paddleHeight) {
       if (x > paddleX2 && x < paddleX2 + paddleWidth) {
         dy = -dy;
-      } else if (y - ballRadius < 0) {
-        score += 100;
-        reset();
-      };
-    }
+      }
+      else if (y - ballRadius < 0) {
+      score += 100;
+        dy=-dy;
+      reset();
+    } 
+
+
+    };
 
 
     //paddle moving logic
