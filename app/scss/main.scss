@@ -36,21 +36,13 @@
   color: #fff;
 }
 
-
-body {
-  text-align: center;
-  font-family: 'Arial', sans-serif;
-  /*  background: linear-gradient(bisque, lightskyblue);*/
-//  height: 100vh;
-}
-
 @keyframes bg-color {
   0% {
     background-color: papayawhip;
   }
 
   25% {
-    background-color: lightskyblue;
+    background-color: cornflowerblue;
   }
 
   50% {
@@ -65,13 +57,27 @@ body {
     background-color: bisque;
   }
 }
-#canvas {
-  background-color: lightskyblue;
-//  animation-name: bg-color;
+
+body {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+//  background: linear-gradient(bisque, lightskyblue);
+//  height: 100vh;
+    animation-name: bg-color;
   animation-duration: 50s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
-  animation-play-state: paused;
+  animation-play-state: running;
+}
+
+
+#canvas {
+  background-color: lightskyblue;
+////  animation-name: bg-color;
+//  animation-duration: 50s;
+//  animation-timing-function: ease-in-out;
+//  animation-iteration-count: infinite;
+//  animation-play-state: paused;
 
 }
 
@@ -102,7 +108,27 @@ body {
     right: 0%;
   }
 }
-
+.header {
+//  display: inline-block;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 800px;
+  margin: 0 auto;
+  justify-content: center;
+  background-color: lavenderblush;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+.left, .right ,.cat {
+  text-align: center;
+  display: block;
+  width: 200px;
+}
 .rect {
   width: 150px;
   height: 150px;
@@ -113,14 +139,15 @@ body {
   display: -o-flex;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   padding: 10px;
 }
 
 
 #glCanvas {
-  //  background-color: #000;
   position: relative;
+}
+.cat {
 }
 
 /*!

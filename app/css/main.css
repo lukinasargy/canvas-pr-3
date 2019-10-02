@@ -335,16 +335,12 @@ template {
   background-color: orange;
   color: #fff
 }
-body {
-  text-align: center;
-  font-family: Arial,sans-serif
-}
 @-webkit-keyframes bg-color {
   0% {
     background-color: #ffefd5
   }
   25% {
-    background-color: #87cefa
+    background-color: #6495ed
   }
   50% {
     background-color: azure
@@ -361,7 +357,7 @@ body {
     background-color: #ffefd5
   }
   25% {
-    background-color: #87cefa
+    background-color: #6495ed
   }
   50% {
     background-color: azure
@@ -373,16 +369,22 @@ body {
     background-color: bisque
   }
 }
-#canvas {
-  background-color: #87cefa;
+body {
+  text-align: center;
+  font-family: Arial,sans-serif;
+  -webkit-animation-name: bg-color;
+  animation-name: bg-color;
   -webkit-animation-duration: 50s;
   animation-duration: 50s;
   -webkit-animation-timing-function: ease-in-out;
   animation-timing-function: ease-in-out;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
-  -webkit-animation-play-state: paused;
-  animation-play-state: paused
+  -webkit-animation-play-state: running;
+  animation-play-state: running
+}
+#canvas {
+  background-color: #87cefa
 }
 @-webkit-keyframes mymove {
   0% {
@@ -436,6 +438,40 @@ body {
     right: 0
   }
 }
+.header {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 800px;
+  margin: 0 auto;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: #fff0f5;
+  margin-bottom: 20px;
+  padding: 20px
+}
+.cat,
+.left,
+.right {
+  text-align: center;
+  display: block;
+  width: 200px
+}
 .rect {
   width: 150px;
   height: 150px;
@@ -451,10 +487,9 @@ body {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
   padding: 10px
 }
 #glCanvas {

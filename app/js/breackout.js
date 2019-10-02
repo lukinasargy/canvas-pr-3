@@ -7,7 +7,7 @@ function breackout() {
   var ballRadius = 20;
   var x = ballRadius + Math.floor((canvas.width - 2 * ballRadius) * Math.random()); //begining coordinates
   var y = ballRadius; //begining coordinates
-  var dx = Math.round(Math.random() * 3) + 2;
+  var dx = Math.round(Math.random() * 3) + 2; 
   var dy = Math.round(Math.random() * 3) + 2;
   var ballColor = "yellow";
   var persons = 1;
@@ -112,7 +112,8 @@ function breackout() {
     drawBall();
     drawPaddle(paddleX, canvas.height - paddleHeight);
     drawPaddle(paddleX2, 0);
-    $('#key').html(dx + "scoreDown =" + score + "scoreUp=" + score2);
+    $('#left').html("score Down: " + score );
+    $('#right').html("score Up: " + score2);
     x += dx;
     y += dy;
     //ball hitting wall
